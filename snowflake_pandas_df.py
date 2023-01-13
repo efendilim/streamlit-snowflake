@@ -1,23 +1,8 @@
 import streamlit as st
-import snowflake.connector
-import pandas as pd
+from snowflake.snowpark import Session
 
-cnn = snowflake.connector.connect(
-    user = "elim0412",
-    password = "justType1234",
-    account = "wqtoeej-oh18991",
-    warehouse = "compute_wh",
-    database = "summit_hol",
-    schema = "public"
-)
+session = Session.builder.configs(st.secrets.snowflake).create()
 
-cs = cnn.cursor()
-sql = "select * from employee"
-cs.execute(sql)
-df = cs.fetch_pandas_all()
-cs.close()
-cnn.close()
+df = session.table("employee")
 
-# print(df.head())
-
-st.table(df)
+st.dataframe(df)
