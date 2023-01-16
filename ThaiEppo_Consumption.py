@@ -31,6 +31,7 @@ def create_session_object():
     return session
   
 # Create Snowpark DataFrames that loads data from Thai EPPO
+@st.cache
 def load_data(session): 
     #'LPG, Propane and Butane' consumption per year
     #Prepare data frame, set query parameters
