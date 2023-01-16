@@ -31,7 +31,6 @@ def create_session_object():
     return session
   
 # Create Snowpark DataFrames that loads data from Thai EPPO
-@st.cache
 def load_data(session): 
     #'LPG, Propane and Butane' consumption per year
     #Prepare data frame, set query parameters
@@ -95,29 +94,5 @@ def load_data(session):
     st.bar_chart(data=pd_df_pce_all.tail(25), width=0, height=0, use_container_width=True)
 
     
-# --- USER AUTHENTICATION ---
-names = ["Efendi Lim", "Simin Liew"]
-usernames = ["elim", "syliew"]
-
-# load hashed passwords
-file_path = Path(__file__).parent / "hashed_pw.pkl"
-with file_path.open("rb") as file:
-    hashed_passwords = pickle.load(file)
-
-authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
-    "ts_demo", "ampolts", cookie_expiry_days=30)
-
-name, authentication_status, username = authenticator.login("Login", "main")
-
-if authentication_status == False:
-    st.error("Username/password is incorrect")
-
-if authentication_status == None:
-    st.warning("Please enter your username and password")
-
-if authentication_status:
-    # ---- SIDEBAR ----
-    st.sidebar.title(f"Welcome {name}")
-    authenticator.logout("Logout", "sidebar")
-    session = create_session_object()
-    load_data(session)
+session = create_session_object()
+load_data(session)
