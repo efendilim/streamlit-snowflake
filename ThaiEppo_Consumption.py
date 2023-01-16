@@ -27,7 +27,7 @@ def create_session_object():
 # Create Snowpark DataFrames that loads data from Thai EPPO
 def load_data(session): 
     #Prepare data frame, set query parameters
-    snow_df_pce = (session.sql("SELECT  *  FROM ( SELECT  *  FROM (THAI_EPPO_CONSUMPTION)) LIMIT 10000 OFFSET 0"))
+    snow_df_pce = (session.sql("SELECT  *  FROM ( SELECT  *  FROM (V_THAIEPPO_CONSUMPTION)) LIMIT 10000 OFFSET 0"))
     #pd_df_pce_year = snow_df_pce.to_pandas()
     #pd_df_pce_year["Consumption"] = pd_df_pce_year["Consumption"].round(2)
     st.dataframe(snow_df_pce)
