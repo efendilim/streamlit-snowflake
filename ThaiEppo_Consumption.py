@@ -6,12 +6,6 @@ from snowflake.snowpark.functions import col, call_udf
 import pandas as pd
 #Streamlit
 import streamlit as st
-#JSON
-import json
-# Authenticator
-import pickle
-from pathlib import Path
-import streamlit_authenticator as stauth
 
 #Set page context
 st.set_page_config(
@@ -35,7 +29,7 @@ def load_data(session):
     #'LPG, Propane and Butane' consumption per year
     #Prepare data frame, set query parameters
     snow_df_pce = (session.table("PUBLIC.THAI_EPPO_CONSUMPTION"))
-    st.dataframe(df)
+    st.dataframe(snow_df_pce)
 
     
 session = create_session_object()
