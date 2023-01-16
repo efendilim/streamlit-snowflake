@@ -1,3 +1,2 @@
 streamlit==1.16.0
 snowflake-snowpark-python
-streamlit-authenticator==0.1.5
