@@ -30,7 +30,7 @@ def load_data(session):
     snow_df_pce = (session.sql("select YEAR as Year, VALUE as Consumption from PUBLIC.THAI_EPPO_CONSUMPTION order by Year desc"))
     pd_df_pce_year = snow_df_pce.to_pandas()
     pd_df_pce_year["Consumption"] = pd_df_pce_year["Consumption"].round(2)
-    st.dataframe(snow_df_pce)
+    st.dataframe(pd_df_pce_year)
 
     
 session = create_session_object()
